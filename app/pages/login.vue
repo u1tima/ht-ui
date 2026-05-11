@@ -75,7 +75,7 @@
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: {
-				redirectTo: 'https://gleeful-jalebi-31e055.netlify.app/login/confirm',
+				redirectTo: 'https://ht-ui.vercel.app/confirm',
 			},
 		})
 
