@@ -11,9 +11,7 @@ export default defineNuxtConfig({
 	runtimeConfig: {
 		public: {
 			// Set to production URL on Vercel, localhost locally
-			siteUrl: process.env.NODE_ENV === 'production'
-				? 'https://ht-ui.vercel.app/'
-				: 'http://localhost:3000'
+			siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? ''
 		},
 	},
 

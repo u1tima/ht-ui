@@ -66,20 +66,18 @@
 	const signWithGoogle = async () => {
 		const { public: publicConfig } = useRuntimeConfig()
 
-		console.log(publicConfig)
+		const redirectTo =
+			(publicConfig?.siteUrl ? `${publicConfig.siteUrl}/confirm` : `${window.location.origin}/confirm`)
 
-		const baseUrl =
-			publicConfig.siteUrl ||
-			(typeof window !== 'undefined' ? window.location.origin : '')
+		console.log('oauth redirectTo:', redirectTo)
+		console.log('runtime publicConfig.siteUrl:', publicConfig?.siteUrl)
 
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: {
-				redirectTo: 'https://ht-ui.vercel.app/confirm',
+				redirectTo,
 			},
 		})
-
-		console.log(data)
 	};
 </script>
 
