@@ -1,7 +1,8 @@
 <template>
 	<UDashboardPanel>
-		<template #header>
-			<UDashboardNavbar title="Exchanges" />
+		<template v-slot:header>
+			<UDashboardNavbar title="Exchanges"
+							  text="ddd" />
 		</template>
 	</UDashboardPanel>
 </template>

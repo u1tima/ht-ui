@@ -1,7 +1,7 @@
 <template>
-	<UDashboardPanel>
-		<template #header>
-			<UDashboardNavbar title="Orders" />
-		</template>
-	</UDashboardPanel>
+    <UDashboardPanel>
+        <template v-slot:header>
+            <UDashboardNavbar title="Orders" />
+        </template>
+    </UDashboardPanel>
 </template>

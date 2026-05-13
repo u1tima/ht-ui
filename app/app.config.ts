@@ -3,7 +3,7 @@ export default defineAppConfig({
 		formField: {
 			slots: {
 				container: 'w-full',
-			}
-		}
-	}
-})
+			},
+		},
+	},
+});

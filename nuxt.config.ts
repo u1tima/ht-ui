@@ -5,21 +5,21 @@ export default defineNuxtConfig({
 	modules: [
 		'@nuxt/ui',
 		'@nuxtjs/supabase',
+		'@nuxt/eslint',
 	],
-	css: ['~/assets/css/main.css'],
-
+	css: [
+		'~/assets/css/main.css',
+	],
 	runtimeConfig: {
 		public: {
-			// Set to production URL on Vercel, localhost locally
-			siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? ''
+			siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? '',
 		},
 	},
-
 	ui: {
 		theme: {
 			defaultVariants: {
 				color: 'secondary',
-			}
+			},
 		},
-	}
-})
+	},
+});

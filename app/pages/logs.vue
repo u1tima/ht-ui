@@ -1,7 +1,326 @@
+<script lang="ts" setup>
+	import type { TableColumn } from '@nuxt/ui';
+	import type { LogEventInput } from '~~/types';
+
+	const logData: LogEventInput[] = [
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0001',
+			ts: '2026-05-11T13:59:59.100Z',
+			level: 'info',
+			source: 'webhook',
+			action: 'webhook_received',
+			message: 'TradingView webhook received',
+			env: 'prod',
+			service: 'nuxt-api',
+			version: '1.0.3',
+			trace_id: 'tr_6f3a9c1e',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'signal',
+			entity_id: 'sig_01',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1001',
+			is_duplicate: false,
+			duration_ms: 12,
+			attempt: null,
+			data: { provider: 'tradingview', signal_id: 'TV-1001' },
+			meta: {},
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0002',
+			ts: '2026-05-11T13:59:59.200Z',
+			level: 'info',
+			source: 'webhook',
+			action: 'signal_enqueued',
+			message: 'Signal inserted into queue',
+			env: 'prod',
+			service: 'nuxt-api',
+			version: '1.0.3',
+			trace_id: 'tr_6f3a9c1e',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'signal',
+			entity_id: 'sig_01',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1001',
+			is_duplicate: false,
+			duration_ms: 18,
+			attempt: null,
+			data: { queue_status: 'received' },
+			meta: {},
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0003',
+			ts: '2026-05-11T14:00:10.120Z',
+			level: 'info',
+			source: 'worker',
+			action: 'signal_processing_started',
+			message: 'Started processing signal',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_6f3a9c1e',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'signal',
+			entity_id: 'sig_01',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1001',
+			is_duplicate: false,
+			duration_ms: null,
+			attempt: 1,
+			data: { tv_action: 'BUY', symbol: 'BTC/USDT', order_type: 'market', order_percent: 10 },
+			meta: {},
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0004',
+			ts: '2026-05-11T14:00:10.500Z',
+			level: 'debug',
+			source: 'exchange',
+			action: 'exchange_request',
+			message: 'POST /order',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_6f3a9c1e',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'order',
+			entity_id: 'ord_01',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1001',
+			is_duplicate: false,
+			duration_ms: null,
+			attempt: 1,
+			data: { endpoint: '/order', symbol: 'BTC/USDT', side: 'buy', type: 'market', qty: 0.0012 },
+			meta: { request_id: 'req_01' },
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0005',
+			ts: '2026-05-11T14:00:11.040Z',
+			level: 'debug',
+			source: 'exchange',
+			action: 'exchange_response',
+			message: '200 OK /order',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_6f3a9c1e',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'order',
+			entity_id: 'ord_01',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1001',
+			is_duplicate: false,
+			duration_ms: 540,
+			attempt: 1,
+			data: { endpoint: '/order', http_status: 200, exchange_order_id: 'HL-90001' },
+			meta: {},
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0006',
+			ts: '2026-05-11T14:00:11.290Z',
+			level: 'info',
+			source: 'worker',
+			action: 'signal_processing_done',
+			message: 'Signal processed successfully',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_6f3a9c1e',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'signal',
+			entity_id: 'sig_01',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1001',
+			is_duplicate: false,
+			duration_ms: 1170,
+			attempt: 1,
+			data: { result: 'done' },
+			meta: {},
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0007',
+			ts: '2026-05-11T14:10:04.380Z',
+			level: 'warn',
+			source: 'exchange',
+			action: 'exchange_error',
+			message: '429 Too Many Requests',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_b81c2d11',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'none',
+			entity_id: null,
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1002',
+			is_duplicate: false,
+			duration_ms: 310,
+			attempt: 1,
+			data: { error_code: 'RATE_LIMIT', retryable: true },
+			meta: {},
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0008',
+			ts: '2026-05-11T14:10:05.020Z',
+			level: 'error',
+			source: 'worker',
+			action: 'signal_processing_error',
+			message: 'Signal processing failed',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_b81c2d11',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'signal',
+			entity_id: 'sig_02',
+			bot_id: '11111111-1111-1111-1111-111111111111',
+			user_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+			idempotency_key: 'idemp_tv_sig_1002',
+			is_duplicate: false,
+			duration_ms: 1000,
+			attempt: 1,
+			data: { error_code: 'RATE_LIMIT', retryable: true },
+			meta: { stack: 'Error: RATE_LIMIT\n  at ...' },
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0009',
+			ts: '2026-05-11T14:30:12.100Z',
+			level: 'error',
+			source: 'webhook',
+			action: 'webhook_rejected',
+			message: 'Webhook rejected: invalid secret',
+			env: 'prod',
+			service: 'nuxt-api',
+			version: '1.0.3',
+			trace_id: 'tr_rej_01',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'none',
+			entity_id: null,
+			bot_id: null,
+			user_id: null,
+			idempotency_key: null,
+			is_duplicate: false,
+			duration_ms: 2,
+			attempt: null,
+			data: { error_code: 'INVALID_SECRET', retryable: false },
+			meta: { ip: '34.12.xx.xx', status: 401 },
+		},
+		{
+			id: '1110c1ad-1b9a-4e7b-a6d2-3b0a4f8e0010',
+			ts: '2026-05-11T15:00:00.000Z',
+			level: 'info',
+			source: 'system',
+			action: 'system_healthcheck',
+			message: 'Worker heartbeat OK',
+			env: 'prod',
+			service: 'worker',
+			version: '1.0.3',
+			trace_id: 'tr_health_01',
+			span_id: null,
+			parent_span_id: null,
+			entity_type: 'none',
+			entity_id: null,
+			bot_id: null,
+			user_id: null,
+			idempotency_key: null,
+			is_duplicate: false,
+			duration_ms: 5,
+			attempt: null,
+			data: { uptime_s: 86400, queue_lag_ms: 120 },
+			meta: {},
+		},
+	];
+
+	const columns: TableColumn<LogEventInput>[] = [
+		{
+			accessorKey: 'ts',
+			header: 'Time',
+		},
+		{
+			accessorKey: 'level',
+			header: 'Level',
+		},
+		{
+			accessorKey: 'source',
+			header: 'Source',
+		},
+		{
+			accessorKey: 'action',
+			header: 'Action',
+		},
+		{
+			accessorKey: 'message',
+			header: 'Message',
+		},
+		{
+			accessorKey: 'env',
+			header: 'Env',
+		},
+		{
+			accessorKey: 'service',
+			header: 'Service',
+		},
+		{
+			accessorKey: 'version',
+			header: 'Version',
+		},
+		{
+			accessorKey: 'trace_id',
+			header: 'Trace Id',
+		},
+		{
+			accessorKey: 'span_id',
+			header: 'Span Id',
+		},
+		{
+			accessorKey: 'entity_type',
+			header: 'Entity Type',
+		},
+	];
+
+	function formatMaybeObject(value: unknown): string {
+		if (value === null || value === undefined) return '';
+		if (typeof value === 'string') return value;
+		if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+		try {
+			return JSON.stringify(value);
+		} catch {
+			return String(value);
+		}
+	}
+</script>
+
 <template>
 	<UDashboardPanel>
-		<template #header>
+		<template v-slot:header>
 			<UDashboardNavbar title="Logs" />
+		</template>
+
+		<template v-slot:body>
+			<UTable :data="logData"
+					:columns="columns">
+				<template v-slot:data-cell="{ row }">
+					{{ formatMaybeObject(row.original.data) }}
+				</template>
+
+				<template v-slot:meta-cell="{ row }">
+					{{ formatMaybeObject(row.original.meta) }}
+				</template>
+			</UTable>
 		</template>
 	</UDashboardPanel>
 </template>

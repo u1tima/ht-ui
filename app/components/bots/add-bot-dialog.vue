@@ -1,28 +1,63 @@
 <script lang="ts" setup>
-	import type { IBot } from '~~/types/IBot'
+	import { reactive } from 'vue';
+	import { z } from 'zod';
+	import type { IBot } from '~~/types/IBot';
 
-	const state = reactive<IBot>({
-		id: '',
+	type ExchangeValue = 'binance' | 'hyperLiquid'
+	type PairValue = 'BTCUSDT' | 'ETHUSDT'
+
+	type FormState = {
+		name: string
+		description?: string
+		exchange: ExchangeValue
+		pair: PairValue
+	}
+
+	const state = reactive<FormState>({
 		name: '',
 		description: '',
-		pair: '',
-		exchange: '',
-		status: '',
-		enabled: false,
-		totalPl: '',
-	})
+		exchange: 'hyperLiquid',
+		pair: 'BTCUSDT',
+	});
 
 	const exchanges = [
 		{
 			label: 'Binance',
-			value: 'binance',
+			value: 'binance' as const,
 		},
 		{
 			label: 'HyperLiquid',
-			value: 'hyperLiquid',
+			value: 'hyperLiquid' as const,
 		},
 	];
-	const pairs = ['BTCUSDT', 'ETHUSDT'];
+
+	const pairs: string[] = ['BTCUSDT', 'ETHUSDT'];
+
+	const schema = z.object({
+		name: z.string().min(1, 'Bot name is required'),
+		description: z.string().optional().or(z.literal('')),
+		exchange: z.enum(['binance', 'hyperLiquid']),
+		pair: z.enum(['BTCUSDT', 'ETHUSDT']),
+	});
+
+	const onSubmit = (payload: unknown) => {
+		const data = (payload as { data?: unknown }).data ?? payload;
+		const parsed = schema.safeParse(data);
+		if (!parsed.success) return;
+
+		// TODO: здесь можно создавать IBot через API
+		// parsed.data: { name, description?, exchange, pair }
+
+		const botDraft: IBot = {
+			id: '',
+			status: '',
+			enabled: false,
+			totalPl: '',
+			...parsed.data,
+		};
+
+		console.log('Create bot:', botDraft);
+	};
 </script>
 
 <template>
@@ -30,7 +65,7 @@
 			title="Add new Bot"
 			description="Dialog will create a new bot">
 		<UButton label="Add Bot" />
-		<template #body>
+		<template v-slot:body>
 			<UForm :schema="schema"
 				   :state="state"
 				   class="space-y-4"
@@ -64,7 +99,8 @@
 				</UFormField>
 			</UForm>
 		</template>
-		<template #footer>
+
+		<template v-slot:footer>
 			<UButton type="submit">
 				Create
 			</UButton>

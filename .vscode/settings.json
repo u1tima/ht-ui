@@ -3,5 +3,7 @@
 		"BTCUSDT",
 		"ETHUSDT",
 		"lucide"
-	]
+	],
+	"eslint.useFlatConfig": true,
+	"editor.formatOnSave": true
 }
