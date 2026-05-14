@@ -37,7 +37,6 @@ const globalRules = {
 		'comma-style': ['error', 'last'],
 		'computed-property-spacing': ['error', 'never'],
 		'func-call-spacing': ['error', 'never'],
-		'max-len': ['error', { code: 160, tabWidth: 4 }],
 		'max-params': ['error', 4],
 		'require-await': 'error',
 		'space-before-function-paren': [
@@ -148,10 +147,12 @@ const vueConfig = [
 				{
 					registeredComponentsOnly: false,
 					ignores: [],
-				},
-			],
+				}],
 			'vue/no-mutating-props': ['error', {
 				shallowOnly: true,
+			}],
+			'vue/no-multiple-template-root': ['off', {
+				disallowComments: false,
 			}],
 		},
 	},

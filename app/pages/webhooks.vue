@@ -1,67 +1,306 @@
 <script lang="ts" setup>
-    import type { TableColumn } from '@nuxt/ui';
-    import type { IWebhook } from '~~/types';
+	import type { TableColumn } from '@nuxt/ui';
+	import type { WebhookConfig } from '~~/types/webhooks';
 
-    const data = ref<IWebhook[]>([
-        {
-            bot: 'BTC Long Grid 10x',
-            status: 'Delivered',
-            event: 'BUY',
-            time: '15:42:11',
-            payload: { action: 'buy', symbol: 'BTC-USD' },
-        },
-        {
-            bot: 'ETH Mean Revert',
-            status: 'In work',
-            event: 'DCA',
-            time: '15:42:11',
-            payload: { action: 'buy', symbol: 'BTC-USD' },
-        },
-        {
-            bot: 'SOL Webhook Grid',
-            status: 'Processed',
-            event: 'Sell',
-            time: '15:42:11',
-            payload: { action: 'buy', symbol: 'BTC-USD' },
-        },
-    ]);
+	const webhooksData: WebhookConfig[] = [
+		{
+			id: 'wh_0001',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_01',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_7fK2pQ1a9X',
+			status: 'active',
+			createdAt: '2026-05-01T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:00:00.000Z',
+			lastRequestAt: '2026-05-13T14:21:12.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0002',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_02',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_q2Lm9V8z1R',
+			status: 'active',
+			createdAt: '2026-05-02T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:05:00.000Z',
+			lastRequestAt: '2026-05-13T14:22:40.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0003',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_03',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_4cN8sT0pWm',
+			status: 'disabled',
+			createdAt: '2026-05-03T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:10:00.000Z',
+			lastRequestAt: '2026-05-11T09:13:01.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0004',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_04',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_Yp3aN7k2Dd',
+			status: 'active',
+			createdAt: '2026-05-04T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:15:00.000Z',
+			lastRequestAt: '2026-05-13T14:25:09.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0005',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_05',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_8Jd0mQ5rXc',
+			status: 'active',
+			createdAt: '2026-05-05T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:20:00.000Z',
+			lastRequestAt: '2026-05-13T14:27:31.000Z',
+			lastRequestStatus: 'error',
+			lastErrorMessage: 'Secret mismatch',
+		},
+		{
+			id: 'wh_0006',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_06',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_kA1v6Z9s2H',
+			status: 'active',
+			createdAt: '2026-05-06T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:25:00.000Z',
+			lastRequestAt: '2026-05-13T14:30:44.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0007',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_07',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_3tP0nW2xQa',
+			status: 'disabled',
+			createdAt: '2026-05-07T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:30:00.000Z',
+			lastRequestAt: '2026-05-09T17:05:12.000Z',
+			lastRequestStatus: 'error',
+			lastErrorMessage: 'Webhook disabled',
+		},
+		{
+			id: 'wh_0008',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_08',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_R7m2zL4v9S',
+			status: 'active',
+			createdAt: '2026-05-08T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:35:00.000Z',
+			lastRequestAt: '2026-05-13T14:33:10.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0009',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_09',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_M2x9Qp1Lk8',
+			status: 'active',
+			createdAt: '2026-05-09T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:40:00.000Z',
+			lastRequestAt: '2026-05-13T14:36:58.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0010',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_10',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_0aQ9Lm7P2y',
+			status: 'active',
+			createdAt: '2026-05-10T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:45:00.000Z',
+			lastRequestAt: '2026-05-13T14:40:03.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0011',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_11',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_9sK1vT3nW0',
+			status: 'active',
+			createdAt: '2026-05-11T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:50:00.000Z',
+			lastRequestAt: '2026-05-13T14:43:39.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0012',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_12',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_pV4z1R8m2Q',
+			status: 'disabled',
+			createdAt: '2026-05-12T10:00:00.000Z',
+			updatedAt: '2026-05-13T12:55:00.000Z',
+			lastRequestAt: '2026-05-12T13:11:26.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0013',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_13',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_6Hn2sA8v1Z',
+			status: 'active',
+			createdAt: '2026-05-13T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:00:00.000Z',
+			lastRequestAt: '2026-05-13T14:47:22.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0014',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_14',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_wM1c8D2p9T',
+			status: 'active',
+			createdAt: '2026-05-14T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:05:00.000Z',
+			lastRequestAt: '2026-05-13T14:51:05.000Z',
+			lastRequestStatus: 'error',
+			lastErrorMessage: 'Invalid JSON payload',
+		},
+		{
+			id: 'wh_0015',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_15',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_2Dd7Yp3aN1',
+			status: 'active',
+			createdAt: '2026-05-15T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:10:00.000Z',
+			lastRequestAt: '2026-05-13T14:54:47.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0016',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_16',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_Xc8Jd0mQ5r',
+			status: 'disabled',
+			createdAt: '2026-05-16T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:15:00.000Z',
+			lastRequestAt: '2026-05-10T08:20:00.000Z',
+			lastRequestStatus: 'error',
+			lastErrorMessage: 'Rate limit exceeded',
+		},
+		{
+			id: 'wh_0017',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_17',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_s2HkA1v6Z9',
+			status: 'active',
+			createdAt: '2026-05-17T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:20:00.000Z',
+			lastRequestAt: '2026-05-13T14:58:21.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0018',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_18',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_Qa3tP0nW2x',
+			status: 'active',
+			createdAt: '2026-05-18T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:25:00.000Z',
+			lastRequestAt: '2026-05-13T15:01:59.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0019',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_19',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_9SR7m2zL4v',
+			status: 'active',
+			createdAt: '2026-05-19T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:30:00.000Z',
+			lastRequestAt: '2026-05-13T15:05:33.000Z',
+			lastRequestStatus: 'ok',
+		},
+		{
+			id: 'wh_0020',
+			provider: 'tradingview',
+			botId: 'bot_btcusdt_20',
+			endpointUrl: 'https://api.example.com/api/webhook/tradingview',
+			secret: 'whsec_1R8m2QpV4z',
+			status: 'disabled',
+			createdAt: '2026-05-20T10:00:00.000Z',
+			updatedAt: '2026-05-13T13:35:00.000Z',
+			lastRequestAt: '2026-05-06T11:45:10.000Z',
+			lastRequestStatus: 'ok',
+		},
+	];
 
-    const columns: TableColumn<IWebhook>[] = [
-        {
-            accessorKey: 'bot',
-            header: 'Bot',
-        },
-        {
-            accessorKey: 'status',
-            header: 'Status',
-        },
-        {
-            accessorKey: 'event',
-            header: 'Event',
-        },
-        {
-            accessorKey: 'time',
-            header: 'Time',
-        },
-        {
-            accessorKey: 'payload',
-            header: 'Payload',
-        },
-    ];
+	const columns: TableColumn<WebhookConfig>[] = [
+		{
+			accessorKey: 'id',
+			header: 'Id',
+		},
+		{
+			accessorKey: 'provider',
+			header: 'Provider',
+		},
+		{
+			accessorKey: 'botId',
+			header: 'Bot Id',
+		},
+		{
+			accessorKey: 'endpointUrl',
+			header: 'Endpoint Url',
+		},
+		{
+			accessorKey: 'secret',
+			header: 'Secret',
+		},
+		{
+			accessorKey: 'status',
+			header: 'Status',
+		},
+		{
+			accessorKey: 'createdAt',
+			header: 'Created At',
+		},
+		{
+			accessorKey: 'createdAt',
+			header: 'Created At',
+		},
+		{
+			accessorKey: 'lastRequestStatus',
+			header: 'Request Status',
+		},
+		{
+			accessorKey: 'lastErrorMessage',
+			header: 'Error Message',
+		},
+	];
 </script>
 
 <template>
-    <UDashboardPanel>
-        <template v-slot:header>
-            <UDashboardNavbar title="Webhooks" />
-        </template>
-        <template v-slot:body>
-            <UTable :data="data"
-                    :columns="columns">
-                <template v-slot:payload-cell="{ row }">
-                    {{ row.original.payload }}
-                </template>
-            </UTable>
-        </template>
-    </UDashboardPanel>
+	<UDashboardPanel>
+		<template v-slot:header>
+			<UDashboardNavbar title="Webhooks" />
+		</template>
+		<template v-slot:body>
+			<UTable :data="webhooksData"
+					:columns="columns" />
+		</template>
+	</UDashboardPanel>
 </template>
